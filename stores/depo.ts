@@ -41,7 +41,7 @@ export const useDepolarStore = defineStore('depolar', () => {
   async function addDepo(request) {
     loading.value = true
     error.value = ''
-    await client('/api/addDepo/', {
+    await client('/api/addDepo', {
       method: 'POST',
       body: {
         category_name: request,

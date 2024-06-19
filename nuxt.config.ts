@@ -4,10 +4,12 @@ import svgLoader from 'vite-svg-loader'
 
 export default defineNuxtConfig({
   // nuxt-auth-sanctum options (also configurable via environment variables)
+
   sanctum: {
-    baseUrl: 'http://localhost:8000', // Laravel API
+    baseUrl: 'https://sarielektronik.com/api/public', // Laravel API
   },
   app: {
+    baseURL: '/lstrend/',
     head: {
       titleTemplate: '%s - Stok Takip V.01',
       title: 'LS TREND',
@@ -142,7 +144,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       sanctum: {
-        baseUrl: 'http://localhost:8000',
+        baseUrl: 'https://sarielektronik.com/api/public',
         userStateKey: 'sanctum.user.identity',
         redirectIfAuthenticated: true,
         endpoints: {
