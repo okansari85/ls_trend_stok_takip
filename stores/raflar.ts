@@ -45,7 +45,7 @@ export const useRaflarStore = defineStore('raflar', () => {
   async function addRaf(request) {
     loading.value = true
     error.value = ''
-    await client('/api/addDepo/', {
+    await client('/api/addDepo', {
       method: 'POST',
       body: {
         category_name: request.raf_name,

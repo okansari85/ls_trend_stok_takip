@@ -5,9 +5,6 @@ import svgLoader from 'vite-svg-loader'
 export default defineNuxtConfig({
   // nuxt-auth-sanctum options (also configurable via environment variables)
 
-  sanctum: {
-    baseUrl: 'https://sarielektronik.com/api/public', // Laravel API
-  },
   app: {
     baseURL: '/lstrend/',
     head: {
@@ -140,39 +137,14 @@ export default defineNuxtConfig({
   pinia: {
     storesDirs: ['./stores/**'],
   },
-
-  runtimeConfig: {
-    public: {
-      sanctum: {
-        baseUrl: 'https://sarielektronik.com/api/public',
-        userStateKey: 'sanctum.user.identity',
-        redirectIfAuthenticated: true,
-        endpoints: {
-          csrf: '/sanctum/csrf-cookie',
-          login: '/login',
-          logout: '/logout',
-          user: '/api/user',
-        },
-        csrf: {
-          cookie: 'XSRF-TOKEN',
-          header: 'X-XSRF-TOKEN',
-        },
-        client: {
-          retry: false,
-        },
-        redirect: {
-          keepRequestedRoute: false,
-          onLogin: '/',
-          onLogout: '/',
-          onAuthOnly: '/login',
-          onGuestOnly: '/',
-        },
-        globalMiddleware: {
-          enabled: true,
-          allow404WithoutAuth: true,
-        },
-        logLevel: 3,
-      },
+  sanctum: {
+    mode: 'cookie',
+    baseUrl: 'https://sarielektronik.com/api/public',
+    endpoints: {
+      csrf: '/sanctum/csrf-cookie',
+      login: '/login',
+      logout: '/logout',
+      user: '/api/user',
     },
   },
 })

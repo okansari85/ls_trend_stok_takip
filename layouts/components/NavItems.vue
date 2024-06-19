@@ -77,14 +77,6 @@ const show = ref(false);
       to: '/register',
     }"
   />
-  <VerticalNavLink
-    v-show="show"
-    :item="{
-      title: 'Error',
-      icon: 'ri-information-line',
-      to: '/no-existence',
-    }"
-  />
 
   <!-- 👉 User Interface -->
   <VerticalNavSectionTitle
