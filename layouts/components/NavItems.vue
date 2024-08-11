@@ -61,6 +61,29 @@ const show = ref(false);
     }"
   />
 
+  <!-- 👉 Apps & Pages -->
+  <VerticalNavSectionTitle
+    :item="{
+      heading: 'MÜŞTERİ SİPARİŞLERİ',
+    }"
+  />
+
+  <VerticalNavLink
+    :item="{
+      title: 'Siparişler',
+      icon: 'ri-bank-card-fill',
+      to: '/siparisler',
+    }"
+  />
+
+  <VerticalNavLink
+    :item="{
+      title: 'Hakediş Tablosu',
+      icon: 'ri-archive-drawer-line',
+      to: '/hakedis',
+    }"
+  />
+
   <VerticalNavLink
     v-show="show"
     :item="{

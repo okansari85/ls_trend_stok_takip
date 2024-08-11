@@ -16,7 +16,7 @@ const dialog = defineModel()
     >
       <VListItem
         prepend-icon="$vuetify-outline"
-        title="Refreshing Application..."
+        title="Yükleniyor..."
       >
         <template #prepend>
           <div class="pe-4">

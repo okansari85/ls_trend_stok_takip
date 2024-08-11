@@ -3,10 +3,13 @@ import vuetify from 'vite-plugin-vuetify'
 import svgLoader from 'vite-svg-loader'
 
 export default defineNuxtConfig({
-  // nuxt-auth-sanctum options (also configurable via environment variables)
+  ssr: false,
 
+  // nuxt-auth-sanctum options (also configurable via environment variables)
   app: {
-    baseURL: '/lstrend/',
+    baseURL: '',
+
+    // '/lstrend/',
     head: {
       titleTemplate: '%s - Stok Takip V.01',
       title: 'LS TREND',
@@ -86,6 +89,7 @@ export default defineNuxtConfig({
   },
 
   vite: {
+
     define: { 'process.env': {} },
 
     resolve: {
@@ -97,6 +101,7 @@ export default defineNuxtConfig({
         '@styles': fileURLToPath(new URL('./assets/styles/', import.meta.url)),
         '@configured-variables': fileURLToPath(new URL('./assets/styles/variables/_template.scss', import.meta.url)),
       },
+
     },
 
     build: {
@@ -139,12 +144,20 @@ export default defineNuxtConfig({
   },
   sanctum: {
     mode: 'cookie',
-    baseUrl: 'https://sarielektronik.com/api/public',
-    endpoints: {
-      csrf: '/sanctum/csrf-cookie',
-      login: '/login',
-      logout: '/logout',
-      user: '/api/user',
+    baseUrl: 'http://localhost:8000',
+
+    // 'https://sarielektronik.com/api/public',
+    csrf: {
+      cookie: 'XSRF-TOKEN',
+      header: 'X-XSRF-TOKEN',
+    },
+    redirect: {
+      onAuthOnly: '/login',
+      onGuestOnly: '/dashboard',
+    },
+    globalMiddleware: {
+      enabled: true,
     },
   },
+
 })
