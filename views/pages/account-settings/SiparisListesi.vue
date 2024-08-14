@@ -109,7 +109,7 @@ defineExpose({
               <VListItem
                 v-for="itm in item.items"
                 :key="itm.id"
-                :subtitle="itm.product.productCode"
+                :subtitle="`${itm.product.productCode} X ${itm.orderable.quantity}`"
                 :title="itm.product.productTitle"
               >
                 <template #prepend>
@@ -158,7 +158,6 @@ defineExpose({
               </VBtn>
             </div>
           </template>
-          <template #bottom />
         </VDataTable>
       </VCard>
     </VCol>
