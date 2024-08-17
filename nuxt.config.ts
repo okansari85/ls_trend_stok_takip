@@ -47,7 +47,11 @@ export default defineNuxtConfig({
     }],
   },
 
-  plugins: ['@/plugins/vuetify/index.ts', '@/plugins/iconify/index.ts', '@/plugins/sweetalert2.ts'],
+  plugins: [
+    '@/plugins/vuetify/index.ts',
+    '@/plugins/iconify/index.ts',
+    '@/plugins/sweetalert2.ts',
+  ],
 
   imports: {
     dirs: ['./@core/utils', './@core/composable/', './plugins/*/composables/*'],

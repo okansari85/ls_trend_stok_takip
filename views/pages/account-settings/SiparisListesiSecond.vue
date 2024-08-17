@@ -22,14 +22,6 @@ const confir = ref({
   message: '',
 })
 
-const openConfirmation = (deger: string, item: { id: number }) => {
-  confir.value.deger = deger
-  confir.value.item = item.id
-  confir.value.title = 'Emin misiniz?'
-  confir.value.message = 'Siparişi onayladığınızda sipariş kalemleri hakedişe düşecek ve sipariş onaylanacaktır.'
-  confirmation.value = true
-}
-
 const clickedAgree = async (val: { deger: string; item: any }) => {
   if (val.deger === 'approve_order') {
     await siparisler.addHakedis(val.item).then(() => {
@@ -84,9 +76,20 @@ defineExpose({
         >
           <template #item.platformId="{ item }">
             <div class="d-flex">
-              <span>
-                {{ item.platformId === 1 ? 'N11' : item.platformId === 2 ? 'HB' : '' }}
-              </span>
+              <img
+                v-if="item.platformId === 1"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/N11_logo.svg/320px-N11_logo.svg.png"
+                alt="n11 Logo"
+                class="logo n11-logo"
+                style="inline-size: 50px;"
+              >
+              <img
+                v-if="item.platformId === 2"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Hepsiburada_logo_official.svg/320px-Hepsiburada_logo_official.svg.png"
+                alt="Hepsiburada Logo"
+                class="logo"
+                style="inline-size: 90px;"
+              >
             </div>
           </template>
           <template #item.orderDate="{ item }">
@@ -125,13 +128,22 @@ defineExpose({
           <template #item.shippingCompanyName="{ item }">
             <div class="d-flex flex-column">
               <span class="d-block font-weight-medium text-high-emphasis text-truncate"> {{ item.shippingCompanyName }}</span>
-              <small> <VChip
+              <small style="margin-block-end:5px"> <VChip
                 color="success"
                 class="font-weight-medium"
                 size="small"
               >
                 {{ item.campaignNumber }}
               </VChip></small>
+              <Yazdir
+                :platform="item.platformId === 1 ? 'n11' : 'hepsiburada'"
+                :district="item.buyer.adresses[0].district"
+                :city="item.buyer.adresses[0].city"
+                :shipping-company-name="item.shippingCompanyName"
+                :barcode-number="item.campaignNumber"
+                :customer-name="item.buyer.fullName"
+                :items="item.items"
+              />
             </div>
           </template>
         </VDataTable>
