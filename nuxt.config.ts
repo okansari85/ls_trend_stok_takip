@@ -7,7 +7,7 @@ export default defineNuxtConfig({
 
   // nuxt-auth-sanctum options (also configurable via environment variables)
   app: {
-    baseURL: '',
+    baseURL: '/lstrend/',
 
     // '/lstrend/',
     head: {
@@ -148,7 +148,7 @@ export default defineNuxtConfig({
   },
   sanctum: {
     mode: 'cookie',
-    baseUrl: 'http://localhost:8000',
+    baseUrl: 'https://sarielektronik.com/api/public',
 
     // 'https://sarielektronik.com/api/public',
     csrf: {

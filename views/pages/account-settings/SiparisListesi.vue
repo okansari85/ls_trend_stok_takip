@@ -86,9 +86,20 @@ defineExpose({
         >
           <template #item.platformId="{ item }">
             <div class="d-flex">
-              <span>
-                {{ item.platformId === 1 ? 'N11' : item.platformId === 2 ? 'HB' : '' }}
-              </span>
+              <img
+                v-if="item.platformId === 1"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/N11_logo.svg/320px-N11_logo.svg.png"
+                alt="n11 Logo"
+                class="logo n11-logo"
+                style="inline-size: 50px;"
+              >
+              <img
+                v-if="item.platformId === 2"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Hepsiburada_logo_official.svg/320px-Hepsiburada_logo_official.svg.png"
+                alt="Hepsiburada Logo"
+                class="logo"
+                style="inline-size: 90px;"
+              >
             </div>
           </template>
           <template #item.orderDate="{ item }">
@@ -139,6 +150,13 @@ defineExpose({
             >
               + {{ item.stock }}
             </VChip>
+          </template>
+          <template #item.is_confirmed="{ item }">
+            <VIcon
+              v-if="item.is_confirmed === 1"
+              color="success"
+              icon="ri-check-line"
+            />
           </template>
           <template #item.actions="{ item }">
             <div class="d-flex gap-2">
