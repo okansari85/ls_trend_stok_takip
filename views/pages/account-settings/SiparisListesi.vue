@@ -100,6 +100,13 @@ defineExpose({
                 class="logo"
                 style="inline-size: 90px;"
               >
+              <img
+                v-if="item.platformId === 3"
+                src="https://birfatura.com/wp-content/uploads/2022/03/pazarama-pazaryeri-entegrasyonu.svg"
+                alt="Pazarama Logo"
+                class="logo"
+                style="inline-size: 90px;"
+              >
             </div>
           </template>
           <template #item.orderDate="{ item }">

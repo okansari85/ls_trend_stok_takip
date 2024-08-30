@@ -4,7 +4,7 @@ import printJS from 'print-js'
 
 // Prop'ları tanımla
 const props = defineProps<{
-  platform: 'n11' | 'hepsiburada'
+  platform: 'n11' | 'hepsiburada' | 'pazarama'
   customerName: string
   city: string
   district: string
@@ -23,6 +23,7 @@ function getShippingLogo() {
     'sürat kargo': 'https://galeri12.uludagsozluk.com/590/surat-kargo_620735.png',
     'yurtiçi kargo': 'https://upload.wikimedia.org/wikipedia/tr/a/a6/YurticiKargo_Logo.gif',
     'mng kargo': 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/MNG_Cargo_logo.svg/320px-MNG_Cargo_logo.svg.png',
+    'mng': 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/MNG_Cargo_logo.svg/320px-MNG_Cargo_logo.svg.png',
   }
 
   return logos[props.shippingCompanyName.toLowerCase()] || ''
@@ -40,7 +41,7 @@ function printContent() {
         <img src="${getShippingLogo()}" alt="Kargo Firması Logo" class="shipping-logo" />
       </div>
       <div class="logos">
-        <img src="${props.platform === 'n11' ? 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/N11_logo.svg/320px-N11_logo.svg.png' : 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Hepsiburada_logo_official.svg/320px-Hepsiburada_logo_official.svg.png'}" alt="Platform Logo" class="logo ${props.platform === 'n11' ? 'n11-logo' : ''}" />
+        <img src="${props.platform === 'n11' ? 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/N11_logo.svg/320px-N11_logo.svg.png' : props.platform === 'hepsiburada' ? 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Hepsiburada_logo_official.svg/320px-Hepsiburada_logo_official.svg.png' : props.platform === 'pazarama' ? 'https://birfatura.com/wp-content/uploads/2022/03/pazarama-pazaryeri-entegrasyonu.svg' : ''}" alt="Platform Logo" class="logo ${props.platform === 'n11' ? 'n11-logo' : ''}" />
       </div>
       <div class="barcode">
         <img src="https://barcode.tec-it.com/barcode.ashx?data=${props.barcodeNumber}&code=Code128" alt="Barkod" />
@@ -182,6 +183,12 @@ function printContent() {
           v-if="platform === 'hepsiburada'"
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Hepsiburada_logo_official.svg/320px-Hepsiburada_logo_official.svg.png"
           alt="Hepsiburada Logo"
+          class="logo"
+        >
+        <img
+          v-if="platform === 'pazarama'"
+          src="https://birfatura.com/wp-content/uploads/2022/03/pazarama-pazaryeri-entegrasyonu.svg"
+          alt="Pazarama Logo"
           class="logo"
         >
       </div>

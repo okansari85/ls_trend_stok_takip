@@ -1,7 +1,9 @@
 <script setup lang="ts">
 const { isMobile } = useDevice()
 if (isMobile)
-  configStore.appContentLayoutNav = 'vertical'
+  console.log('mobile')
+
+// configStore.appContentLayoutNav = 'vertical'
 </script>
 
 <template>

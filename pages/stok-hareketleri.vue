@@ -40,6 +40,7 @@ const tabs = [
     <VWindow
       v-model="activeTab"
       class="mt-5 disable-tab-transition"
+      disabled
     >
       <VWindowItem value="account">
         <StokGirisi />
