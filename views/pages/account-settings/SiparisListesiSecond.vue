@@ -8,6 +8,7 @@ const search = ref('')
 const confirmation = ref(false)
 
 const headers = [
+  { title: 'S/N', value: 'siparisNo' },
   { title: 'Platform', key: 'platformId' },
   { title: 'Sipariş Bilgileri', key: 'orderDate' },
   { title: 'Müşteri Bilgileri', key: 'buyer' },
@@ -74,6 +75,9 @@ defineExpose({
           hide-default-footer
           @update:options="updateOptions"
         >
+          <template #item.siparisNo="{ index }">
+            {{ index + 1 }}
+          </template>
           <template #item.platformId="{ item }">
             <div class="d-flex">
               <img

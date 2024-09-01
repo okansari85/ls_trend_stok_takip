@@ -8,6 +8,7 @@ const search = ref('')
 const confirmation = ref(false)
 
 const headers = [
+  { title: 'S/N', value: 'siparisNo' },
   { title: 'Platform', key: 'platformId' },
   { title: 'Sipariş Bilgileri', key: 'orderDate' },
   { title: 'Müşteri Bilgileri', key: 'buyer' },
@@ -84,6 +85,9 @@ defineExpose({
           hide-default-footer
           @update:options="updateOptions"
         >
+          <template #item.siparisNo="{ index }">
+            {{ index + 1 }}
+          </template>
           <template #item.platformId="{ item }">
             <div class="d-flex">
               <img
@@ -129,6 +133,7 @@ defineExpose({
                 :key="itm.id"
                 :subtitle="`${itm.product.productCode} X ${itm.orderable.quantity}`"
                 :title="itm.product.productTitle"
+                :style="itm.product.productCode === '12040144_1' ? { color: 'red' } : {}"
               >
                 <template #prepend>
                   <VAvatar
@@ -141,22 +146,6 @@ defineExpose({
                 </template>
               </VListItem>
             </VList>
-          </template>
-          <template #item.raf="{ item }">
-            <div class="d-flex gap-2">
-              <span>
-                {{ item.malzemos.raf.name }}
-              </span>
-            </div>
-          </template>
-          <template #item.stock="{ item }">
-            <VChip
-              color="success"
-              class="font-weight-medium"
-              size="small"
-            >
-              + {{ item.stock }}
-            </VChip>
           </template>
           <template #item.is_confirmed="{ item }">
             <VIcon
