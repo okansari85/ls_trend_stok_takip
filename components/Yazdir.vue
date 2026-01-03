@@ -1,21 +1,29 @@
 <script lang="ts" setup>
-import { defineProps, onMounted } from 'vue'
+import { defineProps } from 'vue'
 import printJS from 'print-js'
 
 // Prop'ları tanımla
 const props = defineProps<{
   platform: 'n11' | 'hepsiburada' | 'pazarama'
   customerName: string
+  isPrinted: number
   city: string
   district: string
   shippingCompanyName: string
   barcodeNumber: string
+  itemCheckedCount: number | null | undefined
+  orderChecked: number | null | undefined
+  orderId: number
   items: Array<{
     product: {
       productCode: string
     }
     stockCode: string
   }>
+}>()
+
+const emit = defineEmits<{
+  (event: 'printDone', orderId: number): void
 }>()
 
 const watermarkText = `${props.shippingCompanyName.toUpperCase()} `.repeat(500)
@@ -29,6 +37,10 @@ function getShippingLogo() {
   }
 
   return logos[props.shippingCompanyName.toLowerCase()] || ''
+}
+
+const closedWindow = function () {
+  emit('printDone', props.orderId)
 }
 
 function printContent() {
@@ -59,6 +71,7 @@ function printContent() {
   printJS({
     printable: content,
     type: 'raw-html',
+    onPrintDialogClose: closedWindow,
     targetStyles: ['*'],
     style: `
       @page {
@@ -241,11 +254,39 @@ function printContent() {
         </p>
       </div>
     </div>
-    <a
-      href="#"
-      class="print-link"
-      @click.prevent="printContent"
-    > Etiket Yazdır</a>
+    <small
+      v-show="isPrinted === 1"
+      style="margin-block-end:5px"
+    >
+      <VChip
+        v-show="orderChecked === 0 "
+        elevated
+        color="error"
+        class="font-weight-medium mt-2"
+        size="small"
+        label
+      >
+        Kontrol Edilecek ({{ itemCheckedCount }})
+      </VChip>
+      <VChip
+        v-show="orderChecked === 1 "
+        elevated
+        color="success"
+        class="font-weight-medium mt-2"
+        size="small"
+        label
+      >
+        Kontrol Edildi
+      </VChip>
+    </small>
+    <div class="mt-1">
+      <span>
+        <a
+          href="#"
+          class="print-link"
+          @click.prevent="printContent"
+        > {{ isPrinted === 0 ? 'Etiket Yazdır' : 'Tekrar Yazdır' }}</a></span>
+    </div>
   </div>
 </template>
 
